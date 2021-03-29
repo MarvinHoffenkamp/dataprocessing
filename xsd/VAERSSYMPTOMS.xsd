@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="VAERSSYMPTOMS">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="VAERS_ID" type="xs:integer"/>
+        <xs:element name="SYMPTOM1" type="xs:string"/>
+        <xs:element name="SYMPTOMVERION1" type="xs:integer" nillable="true"/>
+        <xs:element name="SYMPTOM2" type="xs:string"/>
+        <xs:element name="SYMPTOMVERION2" type="xs:integer" nillable="true"/>
+        <xs:element name="SYMPTOM2" type="xs:string"/>
+        <xs:element name="SYMPTOMVERION2" type="xs:integer" nillable="true"/>
+        <xs:element name="SYMPTOM3" type="xs:string"/>
+        <xs:element name="SYMPTOMVERION3" type="xs:integer" nillable="true"/>
+        <xs:element name="SYMPTOM4" type="xs:string"/>
+        <xs:element name="SYMPTOMVERION4" type="xs:integer" nillable="true"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

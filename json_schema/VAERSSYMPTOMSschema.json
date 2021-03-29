@@ -1,0 +1,46 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "title": "VAERSSYMPTOMS",
+    "description": "Definitie datatypen VAERSSYMPTOMS",
+    "type": "object",
+    "properties": {
+        "VAERSID": {
+            "description": "The unique identifier",
+            "type": "integer"
+        },
+        "SYMPTOM1": {
+            "description": "description of symptom",
+            "type": "string"
+        },
+        "SYMPTOMVERSION1": {
+            "description": "Version symptom",
+            "type": "integer"
+        },
+        "SYMPTOM2": {
+            "description": "description of symptom",
+            "type": "string"
+        },
+        "SYMPTOMVERSION2": {
+            "description": "Version symptom",
+            "type": "integer"
+        },
+        "SYMPTOM3": {
+            "description": "description of symptom",
+            "type": "string"
+        },
+        "SYMPTOMVERSION3": {
+            "description": "Version symptom",
+            "type": "integer"
+        },
+        "SYMPTOM4": {
+            "description": "description of symptom",
+            "type": "string"
+        },
+        "SYMPTOMVERSION4": {
+            "description": "Version symptom",
+            "type": "integer"
+        }
+        
+    },
+    "required": ["VAERS_ID", "SYMPTOM1", "SYMPTOMVERSION1", "SYMPTOM2", "SYMPTOMVERSION2", "SYMPTOM3", "SYMPTOMVERSION3", "SYMPTOM4", "SYMPTOMVERSION4"]
+}

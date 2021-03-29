@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="VAERSDATA">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="VAERS_ID" type="xs:integer"/>
+        <xs:element name="RECVDATE" type="xs:date"/>
+        <xs:element name="AGE_YRS" type="xs:integer"/>
+        <xs:element name="CAGE_YR" type="xs:integer"/>
+        <xs:element name="CAGE_MO" type="xs:decimal"/>
+        <xs:element name="SEX">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="M"/>
+              <xs:enumeration value="F"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="RPT_DATE" type="xs:date"/>
+        <xs:element name="SYMPTOM_TEXT" type="xs:string"/>
+        <xs:element name="DIED" nillable="true">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="Y"></xs:enumeration>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="DATEDIED" type="xs:date"/>
+        <xs:element name="L_THREAT">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="Y"></xs:enumeration>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="ER_VISIT">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="Y"></xs:enumeration>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="HOSPITAL" nillable="true">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="Y"></xs:enumeration>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="HOSPDAYS" type="xs:integer" nillable="true"/>
+        <xs:element name="X_STAY" type="xs:integer" nillable="true"/>
+        <xs:element name="DISABLE" nillable="true">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="Y"></xs:enumeration>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="RECOVD">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="Y"/>
+              <xs:enumeration value="N"/>
+              <xs:enumeration value="U"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="VAX_DATE" type="xs:date"/>
+        <xs:element name="ONSET_DATE" type="xs:date"/>
+        <xs:element name="NUMDAYS" type="xs:integer" nillable="true"/>
+        <xs:element name="LABDATA" type="xs:string" nillable="true"/>
+        <xs:element  name="V_ADMINBY">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="4"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element  name="V_FUNDBY">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="4"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="OTHER_MEDS" type="xs:string" nillable="true"/>
+        <xs:element name="CUR_ILL" type="xs:string" nillable="true"/>
+        <xs:element name="HISTORY" type="xs:string" nillable="true"/>
+        <xs:element name="PRIOR_VAX" type="xs:string" nillable="true"/>
+        <xs:element name="SPLTYPE" type="xs:string" nillable="true"/>
+        <xs:element name="FORM_VERS" type="xs:integer"/>
+        <xs:element name="TODAYS_DATE" type="xs:date"/>
+        <xs:element name="OFC_VISIT" nillable="true">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="Y"></xs:enumeration>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="ER_ED_VISIT" nillable="true">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="Y"></xs:enumeration>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="ALLERGIES" type="xs:string" nillable="true"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

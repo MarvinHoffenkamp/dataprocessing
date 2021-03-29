@@ -1,0 +1,44 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "title": "VAERSSYMPTOMS",
+    "description": "Definitie datatypen VAERSSYMPTOMS",
+    "type": "object",
+    "properties": {
+        "VAERSID": {
+            "description": "The unique identifier",
+            "type": "integer"
+        },
+        "VAX_TYPE": {
+            "description": "type of vaccine",
+            "type": "string"
+        },
+        "VAX_MANU": {
+            "description": "Vaccine manufacturer",
+            "type": "string"
+        },
+        "VAX_LOT": {
+            "description": "Lot from which the vaccine originated",
+            "type": "string"
+        },
+        "VAX_DOSE_SERIES": {
+            "description": "Vaccine dose series",
+            "type": "string"
+        },
+        "VAX_ROUTE": {
+            "description": "distribution rout vaccine",
+            "type": "string",
+            "exclusiveMaximum": 3
+        },
+        "VAX_SITE": {
+            "description": "Site at which the vaccine was given",
+            "type": "string",
+            "exclusiveMaximum": 3
+        },
+        "VAX_NAME": {
+            "description": "name of vaccine",
+            "type": "string"
+        }
+        
+    },
+    "required": ["VAERS_ID", "VAX_TYPE", "VAX_MANU", "VAX_LOT", "VAX_DOSE_SERIES", "VAX_ROUTE", "VAX_SITE", "VAX_NAME"]
+}

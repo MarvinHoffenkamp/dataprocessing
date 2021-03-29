@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="VAERSVAX">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="VAERS_ID" type="xs:integer"/>
+        <xs:element name="VAX_TYPE" type="xs:string"/>
+        <xs:element name="VAX_MANU" type="xs:string"/>
+        <xs:element name="VAX_LOT" type="xs:string"/>
+        <xs:element name="VAX_DOSE_SERIES" type="xs:string"/>
+        <xs:element  name="VAX_ROUTE">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="3"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element  name="VAX_SITE">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="3"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="VAX_NAME" nillable="true"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

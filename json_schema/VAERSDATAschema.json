@@ -1,0 +1,223 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "title": "VAERSDATA",
+    "description": "Definitie datatypen VAERSDATA",
+    "type": "object",
+    "properties": {
+        "VAERSID": {
+            "description": "The unique identifier",
+            "type": "integer"
+        },
+        "RECVDATE": {
+            "description": "Date of recovery",
+            "type": "string",
+            "format": "date"
+        },
+        "STATE": {
+            "description": "The state in which the person lives",
+            "type": "string",
+            "exclusiveMaximum": 3
+        },
+        "AGE_YRS": {
+            "description": "Age in years",
+            "type": "integer"
+        },
+        "CAGE_YR": {
+            "description": "year",
+            "type": "integer"
+        },
+        "CAGE_MO": {
+            "description": "month",
+            "type": "integer"
+        },
+        "SEX": {
+            "description": "Sex of the person",
+            "type": "string",
+            "enum": [
+                "M",
+                "F",
+                null
+            ]
+        },
+        "RPT_DATE": {
+            "description": "Repeat date",
+            "type": "string",
+            "format": "date"
+        },
+        "SYMPTOM_TEXT": {
+            "description": "Observed Symptoms",
+            "type": "string"
+        },
+        "DIED": {
+            "description": "Whether the person has died",
+            "type": "string",
+            "enum": [
+                "Y",
+                "",
+                null
+            ]
+        },
+        "DATEDIED": {
+            "description": "The date at which the person has died",
+            "type": "string",
+            "format": "date"
+        },
+        "L_THREAT": {
+            "description": "Whether the case was lifethreatening",
+            "type": "string",
+            "enum": [
+                "Y",
+                "",
+                null
+            ]
+        },
+        "ER_VISIT": {
+            "description": "Whether the person was admitted to the ER",
+            "type": "string",
+            "enum": [
+                "Y",
+                "",
+                null
+            ]
+        },
+        "HOSPITAL": {
+            "description": "Whether the person was admitted to the hospital",
+            "type": "string",
+            "enum": [
+                "Y",
+                "",
+                null
+            ]
+        },
+        "HOSPDAYS": {
+            "description": "The amount of days the person was in the hospital",
+            "type": "integer"
+        },
+        "X_STAY": {
+            "description": "times the person had been in the hospital",
+            "type": "integer"
+        },
+        "DISABLE": {
+            "description": "Whether the person is disabled",
+            "type": "string",
+            "enum": ["Y", "", null]
+        },
+        "RECOVD": {
+            "description": "Whether the person had recovered",
+            "type": "string",
+            "enum": ["Y", "", null]
+        },
+        "VAX_DATE": {
+            "description": "The date at which the person was vaccinated",
+            "type": "string",
+            "format": "date"
+        },
+        "ONSET_DATE": {
+            "description": "date at which the symptoms started onset",
+            "type": "string",
+            "format": "date"
+        },
+        "NUMDAYS": {
+            "description": "the number of days the side effects persisted",
+            "type": "integer"
+        },
+        "LAB_DATA": {
+            "description": "technical lab data regarding the individual",
+            "type": "string"
+        },
+        "V_ADMINBY": {
+            "description": "vaccine administered by",
+            "type": "string",
+            "exclusiveMaximum": 3
+        },
+        "V_FUNDBY": {
+            "description": "vaccine funded by",
+            "type": "string",
+            "exclusiveMaximum": 3
+        },
+        "OTHER_MEDS": {
+            "description": "Other medications the person had been prescribed",
+            "type": "string"
+        },
+        "CUR_ILL": {
+            "description": "Any diseases the person is suffering from",
+            "type": "string"
+        },
+        "HISTORY": {
+            "description": "any issues prior to administering vaccine",
+            "type": "string"
+        },
+        "PRIOR_VAX": {
+            "description": "Any prior vaccinations",
+            "type": "string"
+        },
+        "SPLTTYPE": {
+            "description": "",
+            "type": "string"
+        },
+        "FORM_VERS": {
+            "description": "form version used",
+            "type": "integer"
+        },
+        "TODAYS_DATE": {
+            "description": "todays date",
+            "type": "string",
+            "format": "date"
+        },
+        "BIRTH_DEFECT": {
+            "description": "Birth defects",
+            "type": "string"
+        },
+        "OFC_VISIT": {
+            "description": "Visited office",
+            "type": "string",
+            "enum": ["Y", "", null]
+        },
+        "ER_ED_VISIT": {
+            "description": "Wheter the person has visited the ER",
+            "type": "string",
+            "enum": ["Y", "", null]
+        },
+        "ALLERGIE": {
+            "description": "Allergies",
+            "type": "string"
+        }
+    },
+    "required": [
+        "VAERS_ID",
+        "RECVDATE",
+        "STATE",
+        "AGE_YRS",
+        "CAGE_YR",
+        "CAGE_MO",
+        "SEX",
+        "RPT_DATE",
+        "SYMPTOM_TEXT",
+        "DIED",
+        "DATEDIED",
+        "L_THREAT",
+        "ER_VISIT",
+        "HOSPITAL",
+        "HOSPDAYS",
+        "X_STAY",
+        "DISABLE",
+        "RECOVD",
+        "VAX_DATE",
+        "ONSET_DATE",
+        "NUMDAYS",
+        "LAB_DATA",
+        "V_ADMINBY",
+        "V_FUNDBY",
+        "OTHER_MEDS",
+        "CUR_ILL",
+        "HISTORY",
+        "PRIOR_VAX",
+        "SPLTTYPE",
+        "FORM_VERS",
+        "TODAYS_DATE",
+        "BIRTH_DEFECT",
+        "OFC_VISIT",
+        "ER_ED_VISIT",
+        "ALLERGIE"
+    ]
+}

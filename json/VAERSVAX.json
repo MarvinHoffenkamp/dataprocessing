@@ -1,0 +1,12 @@
+{
+   "VAERSVAX": {
+      "VAERS_ID": "",
+      "VAX_TYPE": "",
+      "VAX_MANU": "",
+      "VAX_LOT": "",
+      "VAX_DOSE_SERIES": "",
+      "VAX_ROUTE": "",
+      "VAX_SITE": "",
+      "VAX_NAME": ""
+   }
+}
