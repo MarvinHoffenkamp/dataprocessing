@@ -8,8 +8,7 @@ async function getMultiple(page = 1){
   console.log("listperpage = " + config.listPerPage)
   const rows = await db.query(
     `SELECT VAERS_ID, RECVDATE, STATE, AGE_YRS, SEX, SYMPTOM_TEXT 
-    FROM 2021vaersdata LIMIT ? OFFSET ?`, 
-    [config.listPerPage, offset]  
+    FROM 2021vaersdata LIMIT ` + config.listPerPage + ` OFFSET ` + offset 
   );
   const data = helper.emptyOrRows(rows);
   const meta = {page};
