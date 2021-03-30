@@ -2,6 +2,19 @@ const db = require('./db');
 const helper = require('../helper');
 const config = require('../config');
 
+async function getSingle(id){
+  const rows = await db.query(
+    `SELECT * 
+    FROM 2021vaersdata WHERE VAERS_ID=?`,
+    [id]
+  );
+  const data = helper.emptyOrRows(rows);
+
+  return {
+    data
+  }
+}
+
 async function getMultiple(page = 1){
   const offset = helper.getOffset(page, config.listPerPage);
   console.log("offset = " + offset)
@@ -72,6 +85,7 @@ async function remove(id){
 }
 
 module.exports = {
+  getSingle,
   getMultiple,
   create,
   update,

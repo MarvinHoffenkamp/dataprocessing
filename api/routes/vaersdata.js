@@ -12,6 +12,16 @@ router.get('/', async function(req, res, next) {
   }
 });
 
+/* GET vaersdata. */
+router.get('/:id', async function(req, res, next) {
+  try {
+    res.json(await vaersdata.getSingle(req.params.id));
+  } catch (err) {
+    console.error(`Error while getting data `, err.message);
+    next(err);
+  }
+});
+
 /* POST VAERSDATA */
 router.post('/', async function(req, res, next) {
   try {
