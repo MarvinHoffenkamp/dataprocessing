@@ -9,13 +9,6 @@ exports.create = (req, res) => {
     });
   }
 
-  /*// Create a entry
-  const vaersdata = new Vaersdata({
-    email: req.body.email,
-    name: req.body.name,
-    active: req.body.active
-  });
-  */
   const vaersdata = new Vaersdata({
     VAERS_ID: req.body.VAERS_ID,
     RECVDATE: req.body.RECVDATE,
