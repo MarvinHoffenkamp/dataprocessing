@@ -1,10 +1,10 @@
 const sql = require("./db.js");
 
 const Vaerssymptoms = function(vaerssymptoms) {
-  this.SYMPTOM_ID = Vaerssymptoms.SYMPTOM_ID;
-  this.VAERS_ID = Vaerssymptoms.VAERS_ID;
-  this.SYMPTOM = Vaerssymptoms.SYMPTOM;
-  this.SYMPTOMVERSION = Vaerssymptoms.SYMPTOMVERSION;
+  this.SYMPTOM_ID = vaerssymptoms.SYMPTOM_ID;
+  this.VAERS_ID = vaerssymptoms.VAERS_ID;
+  this.SYMPTOM = vaerssymptoms.SYMPTOM;
+  this.SYMPTOMVERSION = vaerssymptoms.SYMPTOMVERSION;
   
 }
 Vaerssymptoms.create = (newVaerssymptoms, result) => {
