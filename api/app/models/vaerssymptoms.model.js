@@ -20,8 +20,8 @@ Vaerssymptoms.create = (newVaerssymptoms, result) => {
   });
 };
 
-Vaerssymptoms.findById = (SYMPTOM_ID, result) => {
-  sql.query(`SELECT * FROM 2021vaerssymptoms WHERE SYMPTOM_ID = ${SYMPTOM_ID}`, (err, res) => {
+Vaerssymptoms.findById = (VAERS_ID, result) => {
+  sql.query(`SELECT * FROM 2021vaerssymptoms WHERE VAERS_ID = ${VAERS_ID}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -29,8 +29,8 @@ Vaerssymptoms.findById = (SYMPTOM_ID, result) => {
     }
 
     if (res.length) {
-      console.log("found entry: ", res[0]);
-      result(null, res[0]);
+      console.log("found entry: ", res);
+      result(null, res);
       return;
     }
 
