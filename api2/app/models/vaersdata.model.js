@@ -44,8 +44,8 @@ Vaersdata.create = (newVaersdata, result) => {
       return;
     }
 
-    console.log("created vaersdate entry: ", { ...newCustomer });
-    result(null, { ...newCustomer });
+    console.log("created vaersdate entry: ", { ...newVaersdata });
+    result(null, { ...newVaersdata });
   });
 };
 
@@ -63,7 +63,7 @@ Vaersdata.findById = (VAERS_ID, result) => {
       return;
     }
 
-    // not found Customer with the id
+    // not found entry with the id
     result({ kind: "not_found" }, null);
   });
 };

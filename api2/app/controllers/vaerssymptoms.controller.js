@@ -1,4 +1,4 @@
-const Vaersdata = require("../models/vaersdata.model.js");
+const Vaerssymptoms = require("../models/vaerssymptoms.model.js");
 
 // Create and Save a new entry
 exports.create = (req, res) => {
@@ -9,45 +9,14 @@ exports.create = (req, res) => {
     });
   }
 
-  const vaersdata = new Vaersdata({
+  const vaerssymptoms = new Vaerssymptoms({
     VAERS_ID: req.body.VAERS_ID,
-    RECVDATE: req.body.RECVDATE,
-    STATE: req.body.STATE,
-    AGE_YRS: req.body.AGE_YRS,
-    CAGE_YRS: req.body.CAGE_YRS,
-    CAGE_MO: req.body.CAGE_MO,
-    SEX: req.body.SEX,
-    RPT_DATE: req.body.RPT_DATE,
-    SYMPTOM_TEXT: req.body.SYMPTOM_TEXT,
-    DIED: req.body.DIED,
-    L_THREAT: req.body.L_THREAT,
-    ER_VISIT: req.body.ER_VISIT,
-    HOSPITAL: req.body.HOSPITAL,
-    HOSPDAYS: req.body.HOSPDAYS,
-    X_STAY: req.body.X_STAY,
-    DISABLE: req.body.DISABLE,
-    RECOVD: req.body.RECOVD,
-    VAX_DATE: req.body.VAX_DATE,
-    ONSET_DATE: req.body.ONSET_DATE,
-    NUMDAYS: req.body.NUMDAYS,
-    LAB_DATE: req.body.LAB_DATE,
-    V_ADMINBY: req.body.V_ADMINBY,
-    V_FUNDBY: req.body.V_FUNDBY,
-    OTHER_MEDS: req.body.OTHER_MEDS,
-    CURR_ILL: req.body.CURR_ILL,
-    HISTORY: req.body.HISTORY,
-    PRIOR_VAX: req.body.PRIOR_VAX,
-    SPLTTYPE: req.body.SPLTTYPE,
-    FORM_VERS: req.body.FORM_VERS,
-    TODAYS_DATE: req.body.TODAYS_DATE,
-    BIRTH_DEFECT: req.body.BIRTH_DEFECT,
-    OFC_VISIT: req.body.OFC_VISIT,
-    ER_ED_VISIT: req.body.ER_ED_VISIT,
-    ALLERGIES: req.body.ALLERGIES
+    SYMPTOM: req.body.SYMPTOM,
+    SYMPTOMVERSION: req.body.SYMPTOMVERSION
   });
 
   // Save entry in the database
-  Vaersdata.create(vaersdata, (err, data) => {
+  Vaerssymptoms.create(vaerssymptoms, (err, data) => {
     if (err)
       res.status(500).send({
         message:
@@ -59,7 +28,7 @@ exports.create = (req, res) => {
 
 // Retrieve all entries from the database.
 exports.findAll = (req, res) => {
-  Vaersdata.getAll((err, data) => {
+  Vaerssymptoms.getAll((err, data) => {
     if (err)
       res.status(500).send({
         message:
@@ -71,22 +40,22 @@ exports.findAll = (req, res) => {
 
 // Find a single entry with a VAERS_ID
 exports.findOne = (req, res) => {
-  Vaersdata.findById(req.params.VAERS_ID, (err, data) => {
+  Vaerssymptoms.findById(req.params.SYMPTOM_ID, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
-          message: `Not found entry with id ${req.params.VAERS_ID}.`
+          message: `Not found entry with id ${req.params.SYMPTOM_ID}.`
         });
       } else {
         res.status(500).send({
-          message: "Error retrieving entry with id " + req.params.VAERS_ID
+          message: "Error retrieving entry with id " + req.params.SYMPTOM_ID
         });
       }
     } else res.send(data);
   });
 };
 
-// Update a entry identified by the VAERS_ID in the request
+// Update a entry identified by the SYMPTOM_ID in the request
 exports.update = (req, res) => {
   // Validate Request
   if (!req.body) {
@@ -97,18 +66,18 @@ exports.update = (req, res) => {
 
   console.log(req.body);
 
-  Vaersdata.updateById(
-    req.params.VAERS_ID,
+  Vaerssymptoms.updateById(
+    req.params.SYMPTOM_ID,
     new Vaersdata(req.body),
     (err, data) => {
       if (err) {
         if (err.kind === "not_found") {
           res.status(404).send({
-            message: `Not found entry with id ${req.params.VAERS_ID}.`
+            message: `Not found entry with id ${req.params.SYMPTOM_ID}.`
           });
         } else {
           res.status(500).send({
-            message: "Error updating entry with id " + req.params.VAERS_ID
+            message: "Error updating entry with id " + req.params.SYMPTOM_ID
           });
         }
       } else res.send(data);
@@ -118,24 +87,24 @@ exports.update = (req, res) => {
 
 // Delete a entry with the specified VAERS_ID in the request
 exports.delete = (req, res) => {
-  Vaersdata.remove(req.params.VAERS_ID, (err, data) => {
+  Vaerssymptoms.remove(req.params.SYMPTOM_ID, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
-          message: `Not found entry with id ${req.params.VAERS_ID}.`
+          message: `Not found entry with id ${req.params.SYMPTOM_ID}.`
         });
       } else {
         res.status(500).send({
-          message: "Could not delete entry with id " + req.params.VAERS_ID
+          message: "Could not delete entry with id " + req.params.SYMPTOM_ID
         });
       }
     } else res.send({ message: `entry was deleted successfully!` });
   });
 };
 
-// Delete all Customers from the database.
+// Delete all entries from the database.
 exports.deleteAll = (req, res) => {
-  Vaersdata.removeAll((err, data) => {
+  Vaerssymptoms.removeAll((err, data) => {
     if (err)
       res.status(500).send({
         message:
