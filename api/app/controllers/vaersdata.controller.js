@@ -59,7 +59,7 @@ exports.create = (req, res) => {
 
 // Retrieve all entries from the database.
 exports.findAll = (req, res) => {
-  Vaersdata.getAll((err, data) => {
+  Vaersdata.getAll(req.query.page, (err, data) => {
     if (err)
       res.status(500).send({
         message:

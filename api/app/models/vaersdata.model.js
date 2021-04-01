@@ -68,8 +68,12 @@ Vaersdata.findById = (VAERS_ID, result) => {
   });
 };
 
-Vaersdata.getAll = result => {
-  sql.query("SELECT * FROM 2021vaersdata", (err, res) => {
+Vaersdata.getAll = (page = 1, result) => {
+  if (page == 0) {
+    page = 1;
+  }
+  sql.query("SELECT * FROM 2021vaersdata LIMIT 10 OFFSET " + (page * 10),
+   (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
