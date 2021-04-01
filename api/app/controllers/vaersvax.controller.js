@@ -35,7 +35,7 @@ exports.create = (req, res) => {
 
 // Retrieve all entries from the database.
 exports.findAll = (req, res) => {
-  Vaersvax.getAll((err, data) => {
+  Vaersvax.getAll(req.query.page, (err, data) => {
     if (err)
       res.status(500).send({
         message:

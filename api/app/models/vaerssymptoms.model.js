@@ -39,8 +39,8 @@ Vaerssymptoms.findById = (VAERS_ID, result) => {
   });
 };
 
-Vaerssymptoms.getAll = result => {
-  sql.query("SELECT * FROM 2021vaerssymptoms", (err, res) => {
+Vaerssymptoms.getAll = (page = 0, result) => {
+  sql.query("SELECT * FROM 2021vaerssymptoms LIMIT 10 OFFSET " + (page * 10), (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

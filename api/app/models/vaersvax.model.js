@@ -43,8 +43,8 @@ Vaersvax.findById = (VAX_ID, result) => {
   });
 };
 
-Vaersvax.getAll = result => {
-  sql.query("SELECT * FROM 2021vaersvax", (err, res) => {
+Vaersvax.getAll = (page = 0, result) => {
+  sql.query("SELECT * FROM 2021vaersvax LIMIT 10 OFFSET " + (page * 10), (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
