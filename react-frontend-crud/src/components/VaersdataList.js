@@ -51,7 +51,7 @@ const VaersdataList = () => {
   };
 
   const findById = () => {
-    VaersDataService.findById(searchId)
+    VaersDataService.get(searchId)
       .then(response => {
         setVaersdata(response.data);
         console.log(response.data);
