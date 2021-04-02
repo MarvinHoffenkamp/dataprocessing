@@ -4,17 +4,17 @@ import { Link } from "react-router-dom";
 
 const VaersdataList = () => {
   const [vaersdata, setVaersdata] = useState([]);
-  const [currentTutorial, setCurrentVaersdata] = useState(null);
+  const [currentVaersdata, setCurrentVaersdata] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(-1);
-  const [searchTitle, setSearchId] = useState("");
+  const [searchId, setSearchId] = useState("");
 
   useEffect(() => {
     retrieveVaersdata();
   }, []);
 
   const onChangeSearchId = e => {
-    const searchTitle = e.target.value;
-    setSearchId(id);
+    const searchId = e.target.value;
+    setSearchId(searchId);
   };
 
   const retrieveVaersdata = () => {
@@ -51,9 +51,9 @@ const VaersdataList = () => {
   };
 
   const findById = () => {
-    VaersDataService.findById(id)
+    VaersDataService.findById(searchId)
       .then(response => {
-        setTutorials(response.data);
+        setVaersdata(response.data);
         console.log(response.data);
       })
       .catch(e => {
@@ -87,16 +87,16 @@ const VaersdataList = () => {
         <h4>Vaersdata List</h4>
 
         <ul className="list-group">
-          {vaersdatas &&
-            vaersdatas.map((vaersdata, index) => (
+          {vaersdata &&
+            vaersdata.map((vaersdata, index) => (
               <li
                 className={
                   "list-group-item " + (index === currentIndex ? "active" : "")
                 }
-                onClick={() => setActiveTutorial(vaersdata, index)}
+                onClick={() => setActiveVaersdata(vaersdata, index)}
                 key={index}
               >
-                {vaersdata.title}
+                {vaersdata.VAERS_ID}
               </li>
             ))}
         </ul>
@@ -109,30 +109,30 @@ const VaersdataList = () => {
         </button>
       </div>
       <div className="col-md-6">
-        {currentTutorial ? (
+        {currentVaersdata ? (
           <div>
             <h4>Vaersdata</h4>
             <div>
               <label>
-                <strong>Title:</strong>
+                <strong>VAERS_ID:</strong>
               </label>{" "}
-              {currentTutorial.title}
+              {setCurrentVaersdata.VAERS_ID}
             </div>
             <div>
               <label>
-                <strong>Description:</strong>
+                <strong>Age:</strong>
               </label>{" "}
-              {currentTutorial.description}
+              {setCurrentVaersdata.AGE_YRS}
             </div>
             <div>
               <label>
-                <strong>Status:</strong>
+                <strong>Sex:</strong>
               </label>{" "}
-              {currentTutorial.published ? "Published" : "Pending"}
+              {setCurrentVaersdata.SEX ? "F" : "M"}
             </div>
 
             <Link
-              to={"/tutorials/" + currentTutorial.id}
+              to={"/vaersdata/" + currentVaersdata.VAERS_ID}
               className="badge badge-warning"
             >
               Edit
@@ -141,7 +141,7 @@ const VaersdataList = () => {
         ) : (
           <div>
             <br />
-            <p>Please click on a Tutorial...</p>
+            <p>Please click on a entry...</p>
           </div>
         )}
       </div>

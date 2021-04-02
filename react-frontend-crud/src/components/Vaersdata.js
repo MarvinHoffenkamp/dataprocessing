@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import VaersdataService from "../services/vaersdataService";
 
-
-//VAERS_ID,RECVDATE,STATE,AGE_YRS,CAGE_YR,CAGE_MO,SEX,RPT_DATE,SYMPTOM_TEXT,DIED,DATEDIED,L_THREAT,ER_VISIT,HOSPITAL,HOSPDAYS,X_STAY,DISABLE,RECOVD,VAX_DATE,ONSET_DATE,NUMDAYS,LAB_DATA,V_ADMINBY,V_FUNDBY,OTHER_MEDS,CUR_ILL,HISTORY,PRIOR_VAX,SPLTTYPE,FORM_VERS,TODAYS_DATE,BIRTH_DEFECT,OFC_VISIT,ER_ED_VISIT,ALLERGIES
-const AddVaersdata = () => {
-    const initialVaersdataState = {
-        VAERS_ID: null,
+const Vaersdata = props => {
+  const initialVaersdataState = {
+    VAERS_ID: null,
         RECVDATA: null,
         STATE: null,
         AGE_YRS: null,
@@ -39,91 +37,115 @@ const AddVaersdata = () => {
         OFC_VISIT: null,
         ER_ED_VISIT: null,
         ALLERGIES: null
-    };
-    const [vaersdata, setVaersdata] = useState(initialVaersdataState);
-    const [submitted, setSubmitted] = useState(false);
+  };
+  const [currentVaersdata, setCurrentVaersdata] = useState(initialVaersdataState);
+  const [message, setMessage] = useState("");
 
-    const handleInputChange = event => {
-        const { name, value } = event.target;
-        setVaersdata({ ...vaersdata, [name]: value });
-    };
+  const getVaersdata = VAERS_ID => {
+    VaersdataService.get(VAERS_ID)
+      .then(response => {
+        setCurrentVaersdata(response.data);
+        console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
 
-    const saveVaersdata = () => {
-        var data = {
-            title: vaersdata.title,
-            description: vaersdata.description
-        };
+  useEffect(() => {
+    getVaersdata(props.match.params.id);
+  }, [props.match.params.id]);
 
-        VaersdataService.create(data)
-            .then(response => {
-                setVaersdata({
-                    VAERS_ID: response.data.VAERS_ID,
-                    RECVDATA: response.data.RECVDATA,
-                    STATE: response.data.STATE,
-                    AGE_YRS: response.data.AGE_YRS,
-                    CAGE_YR: response.data.CAGE_YR,
-                    SEX: response.data.SEX,
-                    RPT_DATE: response.data.RPT_DATE,
-                    SYMPTOM_TEXT: response.data.SYMPTOM_TEXT,
-                    DIED: response.data.DIED,
-                    DATEDIED: response.data.DATEDIED,
-                    L_THREAT: response.data.L_THREAT,
-                    ER_VISIT: response.data.ER_VISIT,
-                    HOSPITAL: response.data.HOSPITAL,
-                    HOSPDAYS: response.data.HOSPDAYS,
-                    X_STAY: response.data.X_STAY,
-                    DISABLE: response.data.DISABLE, 
-                    RECOVD: response.data.RECOVD, 
-                    VAX_DATE: response.data.VAX_DATE, 
-                    ONSET_DATE: response.data.ONSET_DATE, 
-                    NUMDAYS: response.data.NUMDAYS, 
-                    LAB_DATA: response.data.LAB_DATA, 
-                    V_ADMINBY: response.data.V_ADMINBY, 
-                    V_FUNDBY: response.data.V_FUNDBY, 
-                    OTHER_MEDS: response.data.OTHER_MEDS, 
-                    CUR_ILL: response.data.CUR_ILL, 
-                    HISTORY: response.data.HISTORY, 
-                    PRIOR_VAX: response.data.PRIOR_VAX, 
-                    SPLTTYPE: response.data.SPLTTYPE, 
-                    FORM_VERS: response.data.FORM_VERS, 
-                    TODAYS_DATE: response.data.TODAYS_DATE, 
-                    BIRTH_DEFECT: response.data.BIRTH_DEFECT, 
-                    OFC_VISIT: response.data.OFC_VISIT, 
-                    ER_ED_VISIT: response.data.ER_ED_VISIT, 
-                    ALLERGIES: response.data.ALLERGIES
-                });
-                setSubmitted(true);
-                console.log(response.data);
-            })
-            .catch(e => {
-                console.log(e);
-            });
-    };
+  const handleInputChange = event => {
+    const { name, value } = event.target;
+    setCurrentVaersdata({ ...currentVaersdata, [name]: value });
+  };
 
-    const newVaersData = () => {
-        setVaersdata(initialVaersdataState);
-        setSubmitted(false);
+  /*const updateVaersdataskibibibi = status => {
+    var data = {
+      VAERS_ID: currentVaersdata.VAERS_ID,
+      RECVDATA: currentVaersdata.RECVDATA,
+      STATE: currentVaersdata.STATE,
+      AGE_YRS: currentVaersdata.AGE_YRS,
+      CAGE_YR: currentVaersdata.CAGE_YR,
+      SEX: currentVaersdata.SEX,
+      RPT_DATE: currentVaersdata.RPT_DATE,
+      SYMPTOM_TEXT: currentVaersdata.SYMPTOM_TEXT,
+      DIED: currentVaersdata.DIED,
+      DATEDIED: currentVaersdata.DATEDIED,
+      L_THREAT: currentVaersdata.L_THREAT,
+      ER_VISIT: currentVaersdata.ER_VISIT,
+      HOSPITAL: currentVaersdata.HOSPITAL,
+      HOSPDAYS: currentVaersdata.HOSPDAYS,
+      X_STAY: currentVaersdata.X_STAY,
+      DISABLE: currentVaersdata.DISABLE, 
+      RECOVD: currentVaersdata.RECOVD, 
+      VAX_DATE: currentVaersdata.VAX_DATE, 
+      ONSET_DATE: currentVaersdata.ONSET_DATE, 
+      NUMDAYS: currentVaersdata.NUMDAYS, 
+      LAB_DATA: currentVaersdata.LAB_DATA, 
+      V_ADMINBY: currentVaersdata.V_ADMINBY, 
+      V_FUNDBY: currentVaersdata.V_FUNDBY, 
+      OTHER_MEDS: currentVaersdata.OTHER_MEDS, 
+      CUR_ILL: currentVaersdata.CUR_ILL, 
+      HISTORY: currentVaersdata.HISTORY, 
+      PRIOR_VAX: currentVaersdata.PRIOR_VAX, 
+      SPLTTYPE: currentVaersdata.SPLTTYPE, 
+      FORM_VERS: currentVaersdata.FORM_VERS, 
+      TODAYS_DATE: currentVaersdata.TODAYS_DATE, 
+      BIRTH_DEFECT: currentVaersdata.BIRTH_DEFECT, 
+      OFC_VISIT: currentVaersdata.OFC_VISIT, 
+      ER_ED_VISIT: currentVaersdata.ER_ED_VISIT, 
+      ALLERGIES: currentVaersdata.ALLERGIES
     };
 
-    return (
-        <div className="submit-form">
-      {submitted ? (
-        <div>
-          <h4>You submitted successfully!</h4>
-          <button className="btn btn-success" onClick={newVaersData}>
-            Add
-          </button>
-        </div>
-      ) : (
-        <div>
+    VaersdataService.update(currentVaersdata.VAERS_ID, data)
+      .then(response => {
+        setCurrentVaersdata({ ...currentVaersdata });
+        console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
+  */
+
+  const updateVaersdata = () => {
+    VaersdataService.update(currentVaersdata.VAERS_ID, currentVaersdata)
+      .then(response => {
+        console.log(response.data);
+        setMessage("The entry was updated successfully!");
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
+
+  const deleteVaersdata = () => {
+    VaersdataService.remove(currentVaersdata.VAERS_ID)
+      .then(response => {
+        console.log(response.data);
+        props.history.push("/vaersdata");
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
+
+  return (
+    <div>
+      {currentVaersdata ? (
+        <div className="edit-form">
+          <h4>Data entry</h4>
+          <form>
           <div className="form-group">
             <label htmlFor="VAERS_ID">VAERS_ID</label>
             <input
               type="text"
               className="form-control"
               id="VAERS_ID"
-              required
-              value={vaersdata.VAERS_ID}
+
+              value={currentVaersdata.VAERS_ID}
               onChange={handleInputChange}
               name="VAERS_ID"
             />
@@ -135,8 +157,8 @@ const AddVaersdata = () => {
               type="text"
               className="form-control"
               id="RECVDATE"
-              required
-              value={vaersdata.RECVDATE}
+
+              value={currentVaersdata.RECVDATE}
               onChange={handleInputChange}
               name="RECVDATE"
             />
@@ -148,8 +170,8 @@ const AddVaersdata = () => {
               type="text"
               className="form-control"
               id="STATE"
-              required
-              value={vaersdata.STATE}
+
+              value={currentVaersdata.STATE}
               onChange={handleInputChange}
               name="STATE"
             />
@@ -161,8 +183,8 @@ const AddVaersdata = () => {
               type="text"
               className="form-control"
               id="AGE_YRS"
-              required
-              value={vaersdata.AGE_YRS}
+
+              value={currentVaersdata.AGE_YRS}
               onChange={handleInputChange}
               name="AGE_YRS"
             />
@@ -174,8 +196,8 @@ const AddVaersdata = () => {
               type="text"
               className="form-control"
               id="CAGE_YRS"
-              required
-              value={vaersdata.CAGE_YRS}
+
+              value={currentVaersdata.CAGE_YRS}
               onChange={handleInputChange}
               name="CAGE_YRS"
             />
@@ -187,8 +209,8 @@ const AddVaersdata = () => {
               type="text"
               className="form-control"
               id="CAGE_MO"
-              required
-              value={vaersdata.CAGE_MO}
+
+              value={currentVaersdata.CAGE_MO}
               onChange={handleInputChange}
               name="CAGE_MO"
             />
@@ -200,8 +222,8 @@ const AddVaersdata = () => {
               type="text"
               className="form-control"
               id="SEX"
-              required
-              value={vaersdata.SEX}
+
+              value={currentVaersdata.SEX}
               onChange={handleInputChange}
               name="SEX"
             />
@@ -213,8 +235,8 @@ const AddVaersdata = () => {
               type="text"
               className="form-control"
               id="RPT_DATE"
-              required
-              value={vaersdata.RPT_DATE}
+
+              value={currentVaersdata.RPT_DATE}
               onChange={handleInputChange}
               name="RPT_DATE"
             />
@@ -226,8 +248,8 @@ const AddVaersdata = () => {
               type="text"
               className="form-control"
               id="SYMPTOM_TEXT"
-              required
-              value={vaersdata.SYMPTOM_TEXT}
+
+              value={currentVaersdata.SYMPTOM_TEXT}
               onChange={handleInputChange}
               name="SYMPTOM_TEXT"
             />
@@ -239,8 +261,8 @@ const AddVaersdata = () => {
               type="text"
               className="form-control"
               id="DIED"
-              required
-              value={vaersdata.DIED}
+
+              value={currentVaersdata.DIED}
               onChange={handleInputChange}
               name="DIED"
             />
@@ -252,8 +274,8 @@ const AddVaersdata = () => {
               type="text"
               className="form-control"
               id="DATEDIED"
-              required
-              value={vaersdata.DATEDIED}
+
+              value={currentVaersdata.DATEDIED}
               onChange={handleInputChange}
               name="DATEDIED"
             />
@@ -265,8 +287,8 @@ const AddVaersdata = () => {
               type="text"
               className="form-control"
               id="L_THREAT"
-              required
-              value={vaersdata.L_THREAT}
+
+              value={currentVaersdata.L_THREAT}
               onChange={handleInputChange}
               name="L_THREAT"
             />
@@ -278,8 +300,8 @@ const AddVaersdata = () => {
               type="text"
               className="form-control"
               id="ER_VISIT"
-              required
-              value={vaersdata.ER_VISIT}
+
+              value={currentVaersdata.ER_VISIT}
               onChange={handleInputChange}
               name="ER_VISIT"
             />
@@ -291,8 +313,8 @@ const AddVaersdata = () => {
               type="text"
               className="form-control"
               id="HOSPITAL"
-              required
-              value={vaersdata.HOSPITAL}
+
+              value={currentVaersdata.HOSPITAL}
               onChange={handleInputChange}
               name="HOSPITAL"
             />
@@ -304,8 +326,8 @@ const AddVaersdata = () => {
               type="text"
               className="form-control"
               id="HOSPDAYS"
-              required
-              value={vaersdata.HOSPDAYS}
+
+              value={currentVaersdata.HOSPDAYS}
               onChange={handleInputChange}
               name="HOSPDAYS"
             />
@@ -317,8 +339,8 @@ const AddVaersdata = () => {
               type="text"
               className="form-control"
               id="X_STAY"
-              required
-              value={vaersdata.X_STAY}
+
+              value={currentVaersdata.X_STAY}
               onChange={handleInputChange}
               name="X_STAY"
             />
@@ -330,8 +352,8 @@ const AddVaersdata = () => {
               type="text"
               className="form-control"
               id="DISABLE"
-              required
-              value={vaersdata.DISABLE}
+
+              value={currentVaersdata.DISABLE}
               onChange={handleInputChange}
               name="DISABLE"
             />
@@ -343,8 +365,8 @@ const AddVaersdata = () => {
               type="text"
               className="form-control"
               id="RECOVD"
-              required
-              value={vaersdata.RECOVD}
+
+              value={currentVaersdata.RECOVD}
               onChange={handleInputChange}
               name="RECOVD"
             />
@@ -356,8 +378,8 @@ const AddVaersdata = () => {
               type="text"
               className="form-control"
               id="VAX_DATE"
-              required
-              value={vaersdata.VAX_DATE}
+
+              value={currentVaersdata.VAX_DATE}
               onChange={handleInputChange}
               name="VAX_DATE"
             />
@@ -369,8 +391,8 @@ const AddVaersdata = () => {
               type="text"
               className="form-control"
               id="ONSET_DATE"
-              required
-              value={vaersdata.ONSET_DATE}
+
+              value={currentVaersdata.ONSET_DATE}
               onChange={handleInputChange}
               name="ONSET_DATE"
             />
@@ -382,8 +404,8 @@ const AddVaersdata = () => {
               type="text"
               className="form-control"
               id="NUMDAYS"
-              required
-              value={vaersdata.NUMDAYS}
+
+              value={currentVaersdata.NUMDAYS}
               onChange={handleInputChange}
               name="NUMDAYS"
             />
@@ -395,8 +417,8 @@ const AddVaersdata = () => {
               type="text"
               className="form-control"
               id="LAB_DATA"
-              required
-              value={vaersdata.LAB_DATA}
+
+              value={currentVaersdata.LAB_DATA}
               onChange={handleInputChange}
               name="LAB_DATA"
             />
@@ -408,8 +430,8 @@ const AddVaersdata = () => {
               type="text"
               className="form-control"
               id="V_ADMINBY"
-              required
-              value={vaersdata.V_ADMINBY}
+
+              value={currentVaersdata.V_ADMINBY}
               onChange={handleInputChange}
               name="V_ADMINBY"
             />
@@ -421,8 +443,8 @@ const AddVaersdata = () => {
               type="text"
               className="form-control"
               id="V_FUNDBY"
-              required
-              value={vaersdata.V_FUNDBY}
+
+              value={currentVaersdata.V_FUNDBY}
               onChange={handleInputChange}
               name="V_FUNDBY"
             />
@@ -434,8 +456,8 @@ const AddVaersdata = () => {
               type="text"
               className="form-control"
               id="OTHER_MEDS"
-              required
-              value={vaersdata.OTHER_MEDS}
+
+              value={currentVaersdata.OTHER_MEDS}
               onChange={handleInputChange}
               name="OTHER_MEDS"
             />
@@ -447,8 +469,8 @@ const AddVaersdata = () => {
               type="text"
               className="form-control"
               id="CUR_ILL"
-              required
-              value={vaersdata.CUR_ILL}
+
+              value={currentVaersdata.CUR_ILL}
               onChange={handleInputChange}
               name="CUR_ILL"
             />
@@ -460,8 +482,8 @@ const AddVaersdata = () => {
               type="text"
               className="form-control"
               id="HISTORY"
-              required
-              value={vaersdata.HISTORY}
+
+              value={currentVaersdata.HISTORY}
               onChange={handleInputChange}
               name="HISTORY"
             />
@@ -473,8 +495,8 @@ const AddVaersdata = () => {
               type="text"
               className="form-control"
               id="PRIOR_VAX"
-              required
-              value={vaersdata.PRIOR_VAX}
+
+              value={currentVaersdata.PRIOR_VAX}
               onChange={handleInputChange}
               name="PRIOR_VAX"
             />
@@ -486,8 +508,8 @@ const AddVaersdata = () => {
               type="text"
               className="form-control"
               id="SPLTTYPE"
-              required
-              value={vaersdata.SPLTTYPE}
+
+              value={currentVaersdata.SPLTTYPE}
               onChange={handleInputChange}
               name="SPLTTYPE"
             />
@@ -499,8 +521,8 @@ const AddVaersdata = () => {
               type="text"
               className="form-control"
               id="FORM_VERS"
-              required
-              value={vaersdata.FORM_VERS}
+
+              value={currentVaersdata.FORM_VERS}
               onChange={handleInputChange}
               name="FORM_VERS"
             />
@@ -512,8 +534,8 @@ const AddVaersdata = () => {
               type="text"
               className="form-control"
               id="TODAYS_DATE"
-              required
-              value={vaersdata.TODAYS_DATE}
+
+              value={currentVaersdata.TODAYS_DATE}
               onChange={handleInputChange}
               name="TODAYS_DATE"
             />
@@ -525,8 +547,8 @@ const AddVaersdata = () => {
               type="text"
               className="form-control"
               id="BIRTH_DEFECT"
-              required
-              value={vaersdata.BIRTH_DEFECT}
+
+              value={currentVaersdata.BIRTH_DEFECT}
               onChange={handleInputChange}
               name="BIRTH_DEFECT"
             />
@@ -538,8 +560,8 @@ const AddVaersdata = () => {
               type="text"
               className="form-control"
               id="OFC_VISIT"
-              required
-              value={vaersdata.OFC_VISIT}
+
+              value={currentVaersdata.OFC_VISIT}
               onChange={handleInputChange}
               name="OFC_VISIT"
             />
@@ -551,8 +573,8 @@ const AddVaersdata = () => {
               type="text"
               className="form-control"
               id="ER_ED_VISIT"
-              required
-              value={vaersdata.ER_ED_VISIT}
+
+              value={currentVaersdata.ER_ED_VISIT}
               onChange={handleInputChange}
               name="ER_ED_VISIT"
             />
@@ -564,21 +586,38 @@ const AddVaersdata = () => {
               type="text"
               className="form-control"
               id="ALLERGIES"
-              required
-              value={vaersdata.ALLERGIES}
+
+              value={currentVaersdata.ALLERGIES}
               onChange={handleInputChange}
               name="ALLERGIES"
             />
           </div>
 
 
-          <button onClick={saveVaersdata} className="btn btn-success">
-            Submit
+
+          </form>
+
+          <button className="badge badge-danger mr-2" onClick={deleteVaersdata}>
+            Delete
           </button>
+
+          <button
+            type="submit"
+            className="badge badge-success"
+            onClick={updateVaersdata}
+          >
+            Update
+          </button>
+          <p>{message}</p>
+        </div>
+      ) : (
+        <div>
+          <br />
+          <p>Please click on a entry...</p>
         </div>
       )}
     </div>
-    );
+  );
 };
 
-export default AddVaersdata;
+export default Vaersdata;

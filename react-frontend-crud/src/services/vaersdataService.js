@@ -24,6 +24,7 @@ const removeAll = () => {
   return http.delete(`/vaersdata`);
 };
 
+// eslint-disable-next-line
 export default {
   getAll,
   get,
