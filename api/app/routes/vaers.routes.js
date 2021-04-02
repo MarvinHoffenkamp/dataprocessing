@@ -2,26 +2,26 @@ module.exports = app => {
   const vaersdatas = require("../controllers/vaersdata.controller.js");
   const vaerssymptoms = require("../controllers/vaerssymptoms.controller.js");
   const vaersvax = require("../controllers/vaersvax.controller.js");
-
+  const cors = require('cors');
 
   //routes VAERSDATA
   // Create a new entry
-  app.post("/vaersdata", vaersdatas.create);
+  app.post("/vaersdata", cors(), vaersdatas.create);
 
   // Retrieve all entry
-  app.get("/vaersdata", vaersdatas.findAll);
+  app.get("/vaersdata", cors(), vaersdatas.findAll);
 
   // Retrieve a single entry with VAERS_ID
-  app.get("/vaersdata/:VAERS_ID", vaersdatas.findOne);
+  app.get("/vaersdata/:VAERS_ID", cors(), vaersdatas.findOne);
 
   // Update a entry with VAERS_ID
-  app.put("/vaersdata/:VAERS_ID", vaersdatas.update);
+  app.put("/vaersdata/:VAERS_ID", cors(), vaersdatas.update);
 
   // Delete a entry with VAERS_ID
-  app.delete("/vaersdata/:VAERS_ID", vaersdatas.delete);
+  app.delete("/vaersdata/:VAERS_ID", cors(), vaersdatas.delete);
 
   // Create a new entry
-  app.delete("/vaersdata", vaersdatas.deleteAll);
+  app.delete("/vaersdata", cors(), vaersdatas.deleteAll);
 
   //routes VAERSSYMPTOMS
   // Create a new entry
