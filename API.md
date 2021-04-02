@@ -243,3 +243,56 @@ Delete vaersvax entries associated with VAERS_ID
 curl -X DELETE http://example.com:3000/vaersvax/916710
 ```
 
+## Vaersall Endpoint
+
+### GET /vaersall
+
+```
+/vaersall/
+```
+
+Vraagt alle data op uit alle 3 de tabellen, items worden per 10 terug gestuurd. Pagination is ingebouwd met argument. Pagina's beginnen vanaf 0
+
+```
+?page=x
+```
+
+#### **Voorbeeld**
+
+```
+http://example.com:3000/vaersall/
+curl -v http://example.com:3000/vaersall/
+
+http://example.com/vaersall?page=2 // Geeft entries 20-30 
+curl -v http://example.com:3000/vaersall?page=2
+```
+
+### GET /vaersall/:id
+
+```
+/vaersall/:id
+```
+
+Vraagt alle data m.b.t de desbetreffende ID op.
+
+#### **Voorbeeld**
+
+```
+http://example.com:3000/vaersall/2
+curl -v http://example.com:3000/vaersall/2
+```
+
+### DELETE /vaersvax/:id
+
+```
+/vaersvax/:id
+```
+
+Delete all entries associated with VAERS_ID
+
+**Voorbeeld**
+
+```
+curl -X DELETE http://example.com:3000/vaersvax/916710
+```
+
