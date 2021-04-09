@@ -119,7 +119,7 @@ Vaersdata.remove = (VAERS_ID, result) => {
       return;
     }
 
-    console.log("deleted entry with id: ", id);
+    console.log("deleted entry with id: ", VAERS_ID);
     result(null, res);
   });
 };
