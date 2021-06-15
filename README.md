@@ -1,3 +1,5 @@
+## Jaar 2 DataProcessing files. Gemaakt ter onderdeel van schoolopdracht.
+
 Mappenstrucuur:
 
 /api bevat de API backend geschreven in node.js. Vul uw database gegevens in /app/config/config.js. Vanuit de root van de API map voert u "npm install" uit. Dit installeert alle nodige pakketten en kan even duren. Daarna kan de server gestart worden met "node server.js" of "nodemon server.js"
@@ -9,6 +11,7 @@ Mappenstrucuur:
 /json_schema bevat de schema's van bovenstaande json bestanden. De schema's zijn volgens draft-07
 
 /react-frontend-crud bevat de poging tot het maken van de frontend app die de API consumeert, helaas kon ik geen manier vinden om de data te valideren en werken dingen zoals bewerken en verwijderen in de app nog niet. Desondanks vind u hier de (voorlopige) broncode. Installatie kan door "npm install" te draaien vanuit de root van de map. Daarna kan de app gestart worden met "npm start". u kunt daarna naar http://localhost:8081 om de app te bekijken
+^^te vinden op branch react-wip
 
 /sql_files bevat de SQL files die geimporteerd moeten worden in de database. Hiervoor moet eerst 1 aangemaakt worden. Deze files maken alleen de tabellen en populaten die met data. De SQL files dienen in de volgorde 2021vaersdata.sql => 2021vaerssymptoms.sql => 2021vaersvax geimporteerd te worden vanwege primary en foreign keys.
 
